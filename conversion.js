@@ -65,5 +65,91 @@ module.exports.rgbToHSL = function rgbToHSL(r, g, b) {
     s = +(s * 100).toFixed(1);
     l = +(l * 100).toFixed(1);
 
-    return "hsl(" + h + "," + s + "%," + l + "%)";
+    var output = {
+        h: h,
+        s: s,
+        l: l,
+        hsl: "hsl(" + h + "," + s + "%," + l + "%)"
+    }
+    return output;
+}
+
+
+// function parseHSL(str) {
+//     var hsl, h, s, l
+//     hsl = str.replace(/[^\d,]/g, '').split(',') // strip non digits ('%')  
+//     h = Number(hsl[0])                            // convert to number
+//     s = Number(hsl[1])
+//     if (s>100){
+//         s = s/10;
+//     }
+//     l = Number(hsl[2])
+//     if (l>100){
+//         l = l/10;
+//     }
+//     return [h, s, l]                              // return parts
+// }
+
+// module.exports.parseHSL = function parseHSL(str) {
+//     var hsl, h, s, l
+//     hsl = str.replace(/[^\d,]/g, '').split(',')   // strip non digits ('%') 
+//     h = Number(hsl[0])                            // convert to number
+//     s = Number(hsl[1])
+//     if (s>100){
+//         s = s/10;
+//     }
+//     l = Number(hsl[2])
+//     if (l>100){
+//         l = l/10;
+//     }
+//     return [h, s, l]                              // return parts
+// }
+
+module.exports.complement = function complement(hsl) {
+    const [h, s, l] = [hsl.h,hsl.s,hsl.l]
+
+    
+        const h1 = (h + 180) % 360
+        const c1 = `hsl(${h1}, ${s}%, ${l}%)`
+        var output = {
+            h: h1,
+            s: s,
+            l: l,
+            hsl: c1
+        }
+        return output;
+
+}
+
+module.exports.HSLtoRGB = function HSLToRGB(h, s, l) {
+    // Must be fractions of 1
+    s /= 100;
+    l /= 100;
+
+    let c = (1 - Math.abs(2 * l - 1)) * s,
+        x = c * (1 - Math.abs((h / 60) % 2 - 1)),
+        m = l - c / 2,
+        r = 0,
+        g = 0,
+        b = 0;
+    if (0 <= h && h < 60) {
+        r = c; g = x; b = 0;
+    } else if (60 <= h && h < 120) {
+        r = x; g = c; b = 0;
+    } else if (120 <= h && h < 180) {
+        r = 0; g = c; b = x;
+    } else if (180 <= h && h < 240) {
+        r = 0; g = x; b = c;
+    } else if (240 <= h && h < 300) {
+        r = x; g = 0; b = c;
+    } else if (300 <= h && h < 360) {
+        r = c; g = 0; b = x;
+    }
+    r = Math.round((r + m) * 255);
+    g = Math.round((g + m) * 255);
+    b = Math.round((b + m) * 255);
+
+    var out = [r,g,b];
+
+    return out;
 }
