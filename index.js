@@ -9,7 +9,10 @@ if (arg1 != undefined){
   
   if (startingChar == "#"){
       var rgb = conversion.hexToRgb(arg1);
+      var hsl = conversion.rgbToHSL(rgb.r,rgb.g,rgb.b);
       console.log(rgb);
+      console.log(hsl);
+
       
   }
 
@@ -19,7 +22,11 @@ if (arg1 != undefined){
       argB = parseInt(process.argv[5]);
 
     var hex = conversion.rgbToHex(argR,argG,argB);
+    var hsl = conversion.rgbToHSL(argR,argG,argB);
+    console.log(hsl);
     console.log(hex);
+
+
     
 }
 // console.log(conversion);
