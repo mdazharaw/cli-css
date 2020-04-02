@@ -31,4 +31,14 @@ function componentToHex(c) {
       console.log(rgb);
       
   }
+
+  if (startingChar == "r"){
+      argR = parseInt(process.argv[3]);
+      argG = parseInt(process.argv[4]);
+      argB = parseInt(process.argv[5]);
+
+    var hex = rgbToHex(argR,argG,argB);
+    console.log(hex);
+    
+}
   
