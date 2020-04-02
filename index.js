@@ -10,8 +10,12 @@ if (arg1 != undefined){
   if (startingChar == "#"){
       var rgb = conversion.hexToRgb(arg1);
       var hsl = conversion.rgbToHSL(rgb.r,rgb.g,rgb.b);
-      console.log(rgb);
-      console.log(hsl);
+      var output = JSON.stringify(rgb) +"\n" + hsl;
+      console.log(`\x1b[38;2;${rgb.r};${rgb.g};${rgb.b}m%s\x1b[0m`, output);
+
+    //   console.log(rgb);
+    //   console.log(hsl);
+
 
       
   }
@@ -23,12 +27,20 @@ if (arg1 != undefined){
 
     var hex = conversion.rgbToHex(argR,argG,argB);
     var hsl = conversion.rgbToHSL(argR,argG,argB);
-    console.log(hsl);
-    console.log(hex);
-
-
+    
+    var output = hsl +"\n" + hex;
+    console.log(`\x1b[38;2;${argR};${argG};${argB}m%s\x1b[0m`, output);
+    // console.log(hsl);
+    // console.log(hex);
     
 }
 // console.log(conversion);
 
+// set as red
+// var r = 255;
+// var b = 0;
+// var g = 0;
+
+// // this special console will create colored output
+// console.log(`\x1b[38;2;${r};${g};${b}m%s\x1b[0m`, "test");
   
